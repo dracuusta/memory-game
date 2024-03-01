@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import Card from "./Card";
-import pokeballPng from './../assets/pokeball-pokemon-svgrepo-com.svg'
+import pokeballPng from './../assets/pokeball-pokemon-svgrepo-com.svg';
+import { Card } from "./Card";
 type Pokemon=any;
 
 
 export default function Gameboard(){
     const [score,setScore]=useState(0);
     const [transformedPokemonData, setTransformedPokemonData]=useState<Pokemon[]>([]);
-    const totalPokemons = 400; 
-    const numberOfPokemonsToFetch = 9;
-    const [isLoading, setIsLoading] = useState(true);
+    const totalPokemons = 840; 
     const [gameStatus, setGameStatus]=useState("");
     const [responseId, setResponseId]=useState<Number[]>([]);
     useEffect(()=>{
         
        async function fetchPokemonData(){
         const Promises=[];
-        setIsLoading(true);
         for(let i=1;i<=9;i++){
         const randomId = Math.floor(Math.random() * totalPokemons) + 1;
         console.log(randomId);
@@ -26,7 +23,6 @@ export default function Gameboard(){
         Promises.push(requestJSON);
         }
        const data=await Promise.all(Promises);
-       setIsLoading(false); 
        transformPokemonData(data);
     }
        fetchPokemonData();
@@ -93,8 +89,8 @@ export default function Gameboard(){
                         <Card key={`${pokemonItem.id}`} img={pokemonItem.image} name={pokemonItem.name}/></button>
                 })}
                 </div>
-                {(gameStatus==="win")&&(<div className="text-2xl font-bold text-green-500 mt-4">You Win Congrats!!! Party Broooooo</div>)}
-                {(gameStatus==="loose")&&(<div className="text-2xl font-bold text-red-500 mt-4">You Loose, Koi nhi bhai! Ho jaega</div>)}
+                {(gameStatus==="win")&&(<div className="text-2xl font-bold bg-yellow-200 text-green-500 mt-4">You Win Congrats!!! Party Broooooo</div>)}
+                {(gameStatus==="loose")&&(<div className="text-2xl font-bold bg-yellow-200 text-red-500 mt-4">You Loose, Koi nhi bhai! Ho jaega</div>)}
            </div>
         </>
     )

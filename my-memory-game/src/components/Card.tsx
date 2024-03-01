@@ -1,4 +1,11 @@
-export default function Card({img, name}){
+interface CardProps {
+    img: string;
+    name: string;
+  }
+
+
+
+export const Card: React.FC<CardProps>=({img,name})=>{
 
 
 
