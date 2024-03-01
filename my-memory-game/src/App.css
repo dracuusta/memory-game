@@ -1,7 +1,9 @@
 body{
   background-image: url('./assets/pokemonWallpaper.jpeg');
 }
-
+button:hover{
+  cursor: url('./public/klipartz.com.png'),auto; 
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
