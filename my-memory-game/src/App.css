@@ -44,12 +44,12 @@ body{
 .read-the-docs {
   color: #888;
 }
-.card .pokeball {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.pokeball {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  margin-left: 42%;
   width: 192px;
   height: 192px;
   background: radial-gradient(
@@ -106,14 +106,4 @@ body{
   to {
     filter: saturate(0.8) brightness(0.8);
   }
-}
-
-.card:hover .pokeball {
-  display: block;
-  animation: showPokeball 2s;
-}
-@keyframes showPokeball {
-  0% { display: none; opacity: 0; }
-  1% { display: block; opacity: 1; }
-  100% { display: block; opacity: 1; }
 }

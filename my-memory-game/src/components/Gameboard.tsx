@@ -10,20 +10,24 @@ export default function Gameboard(){
     const totalPokemons = 840; 
     const [gameStatus, setGameStatus]=useState("");
     const [responseId, setResponseId]=useState<Number[]>([]);
+    const [isLoading, setLoading]=useState(true);
     useEffect(()=>{
         
        async function fetchPokemonData(){
         const Promises=[];
+        setLoading(true);
         for(let i=1;i<=9;i++){
         const randomId = Math.floor(Math.random() * totalPokemons) + 1;
-        console.log(randomId);
         let url=`https://pokeapi.co/api/v2/pokemon/${randomId}`;
         const request=await fetch(url)
         let requestJSON=await request.json();
         Promises.push(requestJSON);
         }
+        Promises.slice(0,9);
        const data=await Promise.all(Promises);
+
        transformPokemonData(data);
+       setLoading(false);
     }
        fetchPokemonData();
     },[])
@@ -67,7 +71,7 @@ export default function Gameboard(){
 
 
     const checkWinner=()=>{
-        if(score>5){
+        if(score>=5){
             setGameStatus("win");
         }
         else if(score<0){
@@ -77,24 +81,27 @@ export default function Gameboard(){
 
     return (
         <>
-           <div className="container  mx-auto py-8 px-4">
+           <div className="container  py-2 px-4">
            <div className="header text-center text-4xl font-bold text-red-600 mb-8 bg-gray-400 py-2 px-4 rounded-md shadow-lg">
     <img src={pokeballPng} className="w-16 inline mr-2" alt="Pokeball"/>
     Pokémon Memory Game
 </div>
-                <div className="scoreCard text-xl font-semibold text-right">Score: {score}</div>
-                <div className="grid grid-rows-3 grid-cols-3 gap: 4">
+
+                {(gameStatus==="win")&&(<div className="text-2xl font-bold bg-yellow-200 text-green-500 mt-4">You Win Congrats!!! Party Broooooo</div>)}
+                {(gameStatus==="loose")&&(<div className="text-2xl font-bold bg-yellow-200 text-red-500 mt-4">You Loose, Koi nhi bhai! Ho jaega</div>)}
+                <div className="scoreCard text-3xl  font-semibold text-center p-5  text-yellow-200">Score: {score}</div>
+                {isLoading?(<div className="pokeball"></div>):(<div className="grid grid-rows-3 grid-cols-3 gap: 4">
                 {transformedPokemonData.map((pokemonItem)=>{
                     return <button className="bg-gray-200 opacity-80 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-105 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
                         <Card key={`${pokemonItem.id}`} img={pokemonItem.image} name={pokemonItem.name}/></button>
                 })}
-                </div>
-                {(gameStatus==="win")&&(<div className="text-2xl font-bold bg-yellow-200 text-green-500 mt-4">You Win Congrats!!! Party Broooooo</div>)}
-                {(gameStatus==="loose")&&(<div className="text-2xl font-bold bg-yellow-200 text-red-500 mt-4">You Loose, Koi nhi bhai! Ho jaega</div>)}
+                </div>)}
            </div>
         </>
     )
   
    }
+
+  
 
 
