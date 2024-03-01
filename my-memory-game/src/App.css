@@ -1,5 +1,11 @@
+@font-face{
+  font-family: pokemonFonts;
+  src: url('./public/pokemon-3.ttf');
+}
+
 body{
   background-image: url('./assets/pokemonWallpaper.jpeg');
+  font-family: pokemonFonts;
 }
 button:hover{
   cursor: url('./public/klipartz.com.png'),auto; 
@@ -10,6 +16,8 @@ button:hover{
   padding: 2rem;
   text-align: center;
 }
+
+
 
 .logo {
   height: 6em;

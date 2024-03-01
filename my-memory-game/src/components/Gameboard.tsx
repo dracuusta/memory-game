@@ -34,10 +34,13 @@ export default function Gameboard(){
        const data=await Promise.all(Promises);
 
        transformPokemonData(data);
-       setLoading(false);
+       setTimeout(() => {
+        setLoading(false);
+    }, 3000);
     }
        fetchPokemonData();
     },[])
+   
 
     const transformPokemonData=(data: Pokemon[])=>{
         const transformedData=data.map((pokemon)=>({
@@ -107,7 +110,7 @@ export default function Gameboard(){
     Pokémon Memory Game
 </div>
 
-                <div className="scoreCard text-3xl  font-semibold text-center p-5  text-yellow-200">Score: {score}</div>
+                <div className="scoreCard text-3xl text-center mt-10 opacity-80 mb-[5%] rounded-md bg-white ml-[30%] mr-[30%]  font-semibold text-center p-5  text-red-600">Score: {score}</div>
                 {isLoading?(<div className="pokeball"></div>):(<div className="grid grid-rows-3 grid-cols-3 gap: 4">
                 {transformedPokemonData.map((pokemonItem)=>{
                     return <button className="bg-gray-200 opacity-80 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-95 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
@@ -115,8 +118,8 @@ export default function Gameboard(){
                 })}
                 </div>)}
 
-                {(gameStatus==="win")&&(<div className="text-2xl  flex items-center ml-100 justify-center font-bold bg-yellow-200 text-green-500 ">You Win Congrats!!! Party Broooooo</div>)}
-                {(gameStatus==="loose")&&(<div className="text-2xl flex items-center ml-100 justify-center font-bold bg-yellow-200 text-red-500">You Loose, Koi nhi bhai! Ho jaega</div>)}
+                {(gameStatus==="win")&&(<div className="text-2xl  flex items-center ml-100 justify-center font-bold  text-green-500 ">You Win Congrats!!! Party Broooooo</div>)}
+                {(gameStatus==="loose")&&(<div className="text-2xl flex items-center ml-100 justify-center font-bold  text-red-500">You Loose, Koi nhi bhai! Ho jaega</div>)}
            </div>
         </>
     )
