@@ -22,11 +22,13 @@ export default function Gameboard(){
         setLoading(true);
         while (uniqueIds.size < 9) {
             const randomId = Math.floor(Math.random() * totalPokemons) + 1;
-            if (!uniqueIds.has(randomId)) {
-                uniqueIds.add(randomId);
-                let url = `https://pokeapi.co/api/v2/pokemon/${randomId}`;
-                Promises.push(fetch(url).then(response => response.json()));
-            }
+           if(!uniqueIds.has(randomId)){
+            uniqueIds.add(randomId);
+            let url = `https://pokeapi.co/api/v2/pokemon/${randomId}`;
+            const request=await fetch(url);
+            const data=await request.json();
+            Promises.push(data);
+           }
         }
         Promises.slice(0,9);
        const data=await Promise.all(Promises);
@@ -105,8 +107,6 @@ export default function Gameboard(){
     Pokémon Memory Game
 </div>
 
-                {(gameStatus==="win")&&(<div className="text-2xl font-bold bg-yellow-200 text-green-500 mt-4">You Win Congrats!!! Party Broooooo</div>)}
-                {(gameStatus==="loose")&&(<div className="text-2xl font-bold bg-yellow-200 text-red-500 mt-4">You Loose, Koi nhi bhai! Ho jaega</div>)}
                 <div className="scoreCard text-3xl  font-semibold text-center p-5  text-yellow-200">Score: {score}</div>
                 {isLoading?(<div className="pokeball"></div>):(<div className="grid grid-rows-3 grid-cols-3 gap: 4">
                 {transformedPokemonData.map((pokemonItem)=>{
@@ -114,6 +114,9 @@ export default function Gameboard(){
                         <Card key={`${pokemonItem.id}`} img={pokemonItem.image} name={pokemonItem.name}/></button>
                 })}
                 </div>)}
+
+                {(gameStatus==="win")&&(<div className="text-2xl  flex items-center ml-100 justify-center font-bold bg-yellow-200 text-green-500 ">You Win Congrats!!! Party Broooooo</div>)}
+                {(gameStatus==="loose")&&(<div className="text-2xl flex items-center ml-100 justify-center font-bold bg-yellow-200 text-red-500">You Loose, Koi nhi bhai! Ho jaega</div>)}
            </div>
         </>
     )
