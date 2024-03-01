@@ -5,23 +5,28 @@ type Pokemon=any;
 
 
 export default function Gameboard(){
+
+    const audio=new Audio('./../public/button-124476.mp3')
     const [score,setScore]=useState(0);
     const [transformedPokemonData, setTransformedPokemonData]=useState<Pokemon[]>([]);
     const totalPokemons = 840; 
     const [gameStatus, setGameStatus]=useState("");
     const [responseId, setResponseId]=useState<Number[]>([]);
     const [isLoading, setLoading]=useState(true);
+    const [movesCount, setMovesCount]=useState(0);
     useEffect(()=>{
         
        async function fetchPokemonData(){
         const Promises=[];
+        const uniqueIds=new Set();
         setLoading(true);
-        for(let i=1;i<=9;i++){
-        const randomId = Math.floor(Math.random() * totalPokemons) + 1;
-        let url=`https://pokeapi.co/api/v2/pokemon/${randomId}`;
-        const request=await fetch(url)
-        let requestJSON=await request.json();
-        Promises.push(requestJSON);
+        while (uniqueIds.size < 9) {
+            const randomId = Math.floor(Math.random() * totalPokemons) + 1;
+            if (!uniqueIds.has(randomId)) {
+                uniqueIds.add(randomId);
+                let url = `https://pokeapi.co/api/v2/pokemon/${randomId}`;
+                Promises.push(fetch(url).then(response => response.json()));
+            }
         }
         Promises.slice(0,9);
        const data=await Promise.all(Promises);
@@ -53,9 +58,11 @@ export default function Gameboard(){
         else{
             setScore((prevScore)=>prevScore+1);
         }
+        setMovesCount((prevMove)=>prevMove+1);
     }
     const recordResponse=(id:number)=>()=>{
         const arr=[...responseId,id];
+        start();
         setResponseId(arr);
         checkResponses(id);
         checkWinner();
@@ -66,17 +73,28 @@ export default function Gameboard(){
 
     useEffect(()=>{
         checkWinner();
-    },[score])
+    },[score,movesCount])
 
 
 
     const checkWinner=()=>{
         if(score>=5){
             setGameStatus("win");
+            setScore(0);
+            setTransformedPokemonData([]);
+            setMovesCount(0);
         }
-        else if(score<0){
+        else if(score<0||movesCount>8){
             setGameStatus("loose");
+            setScore(0);
+            setTransformedPokemonData([]);
+            setMovesCount(0);
         }
+
+    }
+
+    const start=()=>{
+        audio.play();
     }
 
     return (
@@ -92,7 +110,7 @@ export default function Gameboard(){
                 <div className="scoreCard text-3xl  font-semibold text-center p-5  text-yellow-200">Score: {score}</div>
                 {isLoading?(<div className="pokeball"></div>):(<div className="grid grid-rows-3 grid-cols-3 gap: 4">
                 {transformedPokemonData.map((pokemonItem)=>{
-                    return <button className="bg-gray-200 opacity-80 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-105 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
+                    return <button className="bg-gray-200 opacity-80 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-95 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
                         <Card key={`${pokemonItem.id}`} img={pokemonItem.image} name={pokemonItem.name}/></button>
                 })}
                 </div>)}
