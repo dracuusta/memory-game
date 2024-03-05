@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Modal(props) {
+export default function Modal(props:any) {
     const [gameStatus, setGameStatus] = useState(props.gameStatus);
 
     const toggleGameStatus = () => {
