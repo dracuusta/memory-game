@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Modal(props:any) {
+export default function Modal(props) {
     const [gameStatus, setGameStatus] = useState(props.gameStatus);
 
     const toggleGameStatus = () => {
@@ -16,6 +16,7 @@ export default function Modal(props:any) {
         <>
             {gameStatus === "win" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="overlay" onClick={toggleGameStatus}></div>
                     <div className="modal-content rounded-lg bg-green-500 text-white p-6 m-4 shadow-lg max-w-sm w-full">
                         <h2 className="text-xl font-bold mb-4">Congratulations!</h2>
                         <p>You Win! 🎉</p>
@@ -27,6 +28,7 @@ export default function Modal(props:any) {
             )}
             {gameStatus === "loose" && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="overlay" onClick={toggleGameStatus}></div>
                     <div className="modal-content rounded-lg bg-red-500 text-white p-6 m-4 shadow-lg max-w-sm w-full">
                         <h2 className="text-xl font-bold mb-4">Game Over</h2>
                         <p>You Lost! 😢 Try Again?</p>

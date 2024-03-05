@@ -1,7 +1,6 @@
-import { useSelect } from '@mui/base'
 import './StartGame.css'
-import { useEffect, useState } from 'react'
-
+import { useState } from 'react'
+import pokeballPng from "./../assets/pokeball-pokemon-svgrepo-com.svg";
 export default function StartGame(props:any){
     const [difficultyState, setDifficultyState]=useState(props.difficultyLevel);
 
@@ -33,6 +32,19 @@ export default function StartGame(props:any){
     
     return (
         <>
+        <div className="header-pokemon-game flex ">
+            <div className="header flex text-center text-4xl font-bold text-white mb-8 py-2 px-4 rounded-md">
+              <img
+                src={pokeballPng}
+                className="w-16 inline mr-2"
+                alt="Pokeball"
+              />
+              <div className="header-pokemon text-yellow-200">
+                Pokémon Memory Game
+              </div>
+            </div>
+          </div>
+
             <div className='difficulty-banner text-white font-bold text-4xl mt-20 -mb-44'>Current-Difficulty:{difficultyState||`Medium`}</div>
             <button className={props.className} onClick={handleStart}>Start Game
             </button>
@@ -50,7 +62,7 @@ export default function StartGame(props:any){
                 <span className="text"></span>Difficult<span className="text-hover">4*4</span>
                 </button>
             </div>
-            <div className="spinner-box inline">
+            <div className="spinner-box ml-24">
   <div className="solar-system">
     <div className="earth-orbit orbit">
       <div className="planet earth"></div>

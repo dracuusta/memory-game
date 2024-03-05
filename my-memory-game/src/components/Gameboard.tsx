@@ -7,7 +7,7 @@ type Pokemon = any;
 export default function Gameboard(props: any) {
   const audio = new Audio("./../public/button-124476.mp3");
   const [score, setScore] = useState(0);
-  const [maxScore,setMaxScore]=useState(8);
+  const [maxScore, setMaxScore] = useState(8);
   const [maxPokemons, setMaxPokemons] = useState(0);
   useEffect(() => {
     switch (props.difficultyLevel) {
@@ -25,14 +25,14 @@ export default function Gameboard(props: any) {
         setMaxPokemons(16);
         setMaxScore(12);
         break;
-        case "":
+      case "":
         setMaxPokemons(9);
         break;
     }
   }, [props.difficultyLevel]);
 
   let gridSize = Math.sqrt(maxPokemons);
-  
+
   useEffect(() => {
     gridSize = Math.sqrt(maxPokemons);
   }, [maxPokemons]);
@@ -156,7 +156,7 @@ export default function Gameboard(props: any) {
             {transformedPokemonData.map((pokemonItem) => {
               return (
                 <button
-                  className="bg-gray-200 hover:bg-gray-100 p-3 rounded-lg shadow-lg transform hover:scale-95 transition-all"
+                  className=" p-3 rounded-lg shadow-lg transform hover:scale-95 transition-all"
                   key={pokemonItem.id}
                   onClick={recordResponse(pokemonItem.id)}
                 >

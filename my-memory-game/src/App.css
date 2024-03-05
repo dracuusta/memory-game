@@ -49,6 +49,7 @@ button:hover{
 
 .card {
   padding: 2em;
+  border-color: #ffcb05;
 }
 
 .read-the-docs {
