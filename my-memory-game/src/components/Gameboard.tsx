@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import pokeballPng from './../assets/pokeball-pokemon-svgrepo-com.svg';
 import { Card } from "./Card";
+import Modal from "./Modal"
 type Pokemon=any;
 
 
@@ -30,13 +31,9 @@ export default function Gameboard(){
             Promises.push(data);
            }
         }
-        Promises.slice(0,9);
-       const data=await Promise.all(Promises);
-
-       transformPokemonData(data);
-       setTimeout(() => {
-        setLoading(false);
-    }, 3000);
+       const limitedPromises= Promises.slice(0,9);
+       transformPokemonData(limitedPromises);
+       setLoading(false);
     }
        fetchPokemonData();
     },[])
@@ -110,17 +107,16 @@ export default function Gameboard(){
     Pokémon Memory Game
 </div>
 
-                <div className="scoreCard text-3xl text-center mt-10 opacity-80 mb-[5%] rounded-md bg-white ml-[30%] mr-[30%]  font-semibold text-center p-5  text-red-600">Score: {score}</div>
+                <div className="scoreCard h-20 flex items-center p-4 justify-center text-3xl text-center opacity-90 mb-[5%] rounded-lg bg-red-600 ml-[25%] mr-[25%] font-bold  text-white shadow-xl border-2 border-yellow-300">Score: {score}</div>
                 {isLoading?(<div className="pokeball"></div>):(<div className="grid grid-rows-3 grid-cols-3 gap: 4">
                 {transformedPokemonData.map((pokemonItem)=>{
-                    return <button className="bg-gray-200 opacity-80 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-95 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
+                    return <button className="bg-gray-200 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-95 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
                         <Card key={`${pokemonItem.id}`} img={pokemonItem.image} name={pokemonItem.name}/></button>
                 })}
                 </div>)}
 
-                {(gameStatus==="win")&&(<div className="text-2xl  flex items-center ml-100 justify-center font-bold  text-green-500 ">You Win Congrats!!! Party Broooooo</div>)}
-                {(gameStatus==="loose")&&(<div className="text-2xl flex items-center ml-100 justify-center font-bold  text-red-500">You Loose, Koi nhi bhai! Ho jaega</div>)}
            </div>
+           <Modal gameStatus={gameStatus}/>
         </>
     )
   
