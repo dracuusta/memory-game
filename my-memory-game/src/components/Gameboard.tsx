@@ -120,7 +120,7 @@ export default function Gameboard() {
             {transformedPokemonData.map((pokemonItem) => {
               return (
                 <button
-                  className="bg-gray-200 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-95 transition-all"
+                  className="bg-gray-200 hover:bg-gray-100 p-3 rounded-lg shadow-lg transform hover:scale-95 transition-all"
                   key={pokemonItem.id}
                   onClick={recordResponse(pokemonItem.id)}
                 >
