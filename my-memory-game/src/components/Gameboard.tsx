@@ -102,12 +102,14 @@ export default function Gameboard(){
     return (
         <>
            <div className="container  py-2 px-4">
-           <div className="header text-center text-4xl font-bold text-red-600 mb-8 bg-gray-400 py-2 px-4 rounded-md shadow-lg">
+            <div className="header-score flex justify-between">
+           <div className="header text-center text-4xl font-bold text-red-600 mb-8 py-2 px-4 rounded-md">
     <img src={pokeballPng} className="w-16 inline mr-2" alt="Pokeball"/>
     Pokémon Memory Game
 </div>
 
-                <div className="scoreCard h-20 flex items-center p-4 justify-center text-3xl text-center opacity-90 mb-[5%] rounded-lg bg-red-600 ml-[25%] mr-[25%] font-bold  text-white shadow-xl border-2 border-yellow-300">Score: {score}</div>
+                <div className="scoreCard text-3xl opacity-90 mb-[5%] rounded-lg  ml-[25%] mr-[25%] font-bold  text-white  ">Score: {score}</div>
+                </div>
                 {isLoading?(<div className="pokeball"></div>):(<div className="grid grid-rows-3 grid-cols-3 gap: 4">
                 {transformedPokemonData.map((pokemonItem)=>{
                     return <button className="bg-gray-200 hover:bg-gray-100 p-4 rounded-lg shadow-lg transform hover:scale-95 transition-all" key={pokemonItem.id} onClick={recordResponse(pokemonItem.id)}>
