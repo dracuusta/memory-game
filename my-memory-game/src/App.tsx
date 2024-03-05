@@ -5,12 +5,12 @@ import StartGame from './components/StartGame'
 
 function App() {
   const [startClicked,setStartClicked]=useState(false);
-
-
+  const [difficultyLevel, setDifficultyLevel]=useState("")
+  console.log(difficultyLevel);
   return (
     <>
-    {!startClicked&&(<StartGame className="startGame" startStatus={startClicked} setStartClicked={setStartClicked}/>)}
-    {startClicked&&(<Gameboard/>)}
+    {!startClicked&&(<StartGame className="startGame" difficultyLevel={difficultyLevel} setDifficultyLevel={setDifficultyLevel} startStatus={startClicked} setStartClicked={setStartClicked}/>)}
+    {startClicked&&(<Gameboard difficultyLevel={difficultyLevel}/>)}
     </>
   )
 }

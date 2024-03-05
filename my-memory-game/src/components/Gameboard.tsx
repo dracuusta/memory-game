@@ -4,9 +4,38 @@ import { Card } from "./Card";
 import Modal from "./Modal";
 type Pokemon = any;
 
-export default function Gameboard() {
+export default function Gameboard(props: any) {
   const audio = new Audio("./../public/button-124476.mp3");
   const [score, setScore] = useState(0);
+  const [maxScore,setMaxScore]=useState(8);
+  const [maxPokemons, setMaxPokemons] = useState(0);
+  useEffect(() => {
+    switch (props.difficultyLevel) {
+      case "EASY":
+        setMaxPokemons(4);
+        setMaxScore(3);
+        break;
+
+      case "MEDIUM":
+        setMaxPokemons(9);
+        setMaxScore(8);
+        break;
+
+      case "HARD":
+        setMaxPokemons(16);
+        setMaxScore(12);
+        break;
+        case "":
+        setMaxPokemons(9);
+        break;
+    }
+  }, [props.difficultyLevel]);
+
+  let gridSize = Math.sqrt(maxPokemons);
+  
+  useEffect(() => {
+    gridSize = Math.sqrt(maxPokemons);
+  }, [maxPokemons]);
   const [transformedPokemonData, setTransformedPokemonData] = useState<
     Pokemon[]
   >([]);
@@ -20,7 +49,7 @@ export default function Gameboard() {
       const Promises = [];
       const uniqueIds = new Set();
       setLoading(true);
-      while (uniqueIds.size < 9) {
+      while (uniqueIds.size < maxPokemons) {
         const randomId = Math.floor(Math.random() * totalPokemons) + 1;
         if (!uniqueIds.has(randomId)) {
           uniqueIds.add(randomId);
@@ -30,12 +59,12 @@ export default function Gameboard() {
           Promises.push(data);
         }
       }
-      const limitedPromises = Promises.slice(0, 9);
+      const limitedPromises = Promises.slice(0, maxPokemons);
       transformPokemonData(limitedPromises);
       setLoading(false);
     }
     fetchPokemonData();
-  }, []);
+  }, [maxPokemons]);
 
   const transformPokemonData = (data: Pokemon[]) => {
     const transformedData = data.map((pokemon) => ({
@@ -75,12 +104,13 @@ export default function Gameboard() {
   }, [score, movesCount]);
 
   const checkWinner = () => {
-    if (score >= 5) {
+    console.log(maxScore);
+    if (score >= maxScore) {
       setGameStatus("win");
       setScore(0);
       setTransformedPokemonData([]);
       setMovesCount(0);
-    } else if (score < 0 || movesCount > 8) {
+    } else if (score < 0 || movesCount > maxPokemons) {
       setGameStatus("loose");
       setScore(0);
       setTransformedPokemonData([]);
@@ -92,20 +122,26 @@ export default function Gameboard() {
     audio.play();
   };
 
+  const gridLayoutStyle = {
+    display: "grid",
+    gridTemplateRows: `repeat(${gridSize}, minmax(0, 1fr))`,
+    gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
+  };
+
   return (
     <>
       <div className="container  py-2 px-4">
         <div className="header-score flex justify-between">
-            <div className="header-pokemon-game flex ">
-          <div className="header flex text-center text-4xl font-bold text-white mb-8 py-2 px-4 rounded-md">
-            <img
-              src={pokeballPng}
-              className="w-16 inline mr-2"
-              alt="Pokeball"
-            />
-            <div className="header-pokemon text-yellow-200">
-              Pokémon Memory Game
-            </div>
+          <div className="header-pokemon-game flex ">
+            <div className="header flex text-center text-4xl font-bold text-white mb-8 py-2 px-4 rounded-md">
+              <img
+                src={pokeballPng}
+                className="w-16 inline mr-2"
+                alt="Pokeball"
+              />
+              <div className="header-pokemon text-yellow-200">
+                Pokémon Memory Game
+              </div>
             </div>
           </div>
 
@@ -116,7 +152,7 @@ export default function Gameboard() {
         {isLoading ? (
           <div className="pokeball"></div>
         ) : (
-          <div className="grid grid-rows-3 grid-cols-3 gap: 4">
+          <div style={gridLayoutStyle}>
             {transformedPokemonData.map((pokemonItem) => {
               return (
                 <button
