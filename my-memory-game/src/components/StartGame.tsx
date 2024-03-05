@@ -9,6 +9,7 @@ export default function StartGame(props:any){
         <>
             
             <button className={props.className} onClick={handleStart}>Start Game
+            </button>
             <h1 className="header-loader">
                 <span className="let1">l</span>  
                 <span className="let2">o</span>  
@@ -18,7 +19,6 @@ export default function StartGame(props:any){
                 <span className="let6">n</span>  
                 <span className="let7">g</span>  
             </h1>
-            </button>
         </>
     )
 }

@@ -4,8 +4,8 @@
 }
 
 body{
-  background-image: url('./assets/pokemonWallpaper.jpeg');
   font-family: pokemonFonts;
+  background-image: url('./../public/pikachu.jpg');
 }
 button:hover{
   cursor: url('./public/klipartz.com.png'),auto; 
@@ -150,6 +150,11 @@ button:hover{
   min-width: 300px;
 }
 
+.header-pokemon{
+  font-family:pokemonFonts;
+
+}
+
 .close-modal {
   position: absolute;
   top: 10px;
@@ -160,7 +165,7 @@ button:hover{
   padding: 10px 20px;
   margin-top: 30vh;
   font-size: 1.5rem;
-  height: 20vh;
+  height: 10vh;
   width:20vw;
   background-color: #ffcb05; /* Pokémon yellow */
   color: #3b4cca; /* Pokédex blue */
@@ -183,8 +188,8 @@ button:hover{
 
 .header-loader {
   margin: 0;
-  padding: 0;
   font-family: pokemonFonts;
+  padding: 0;
   font-weight: 100;
   font-size: 1.1em;
   color: #ff0000;
