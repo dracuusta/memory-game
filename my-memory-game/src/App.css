@@ -1,14 +1,14 @@
 @font-face{
   font-family: pokemonFonts;
-  src: url('./public/pokemon-3.ttf');
+  src: url('/pokemon-3.ttf');
 }
 
 body{
   font-family: pokemonFonts;
-  background-image: url('./../public/pikachu.jpg');
+  background-image: url('/pikachu.jpg');
 }
 button:hover{
-  cursor: url('./public/klipartz.com.png'),auto; 
+  cursor: url('/klipartz.com.png'),auto; 
 }
 #root {
   max-width: 1280px;
