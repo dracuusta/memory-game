@@ -9,7 +9,7 @@ function App() {
   console.log(difficultyLevel);
   return (
     <>
-    {!startClicked&&(<StartGame className="startGame" difficultyLevel={difficultyLevel} setDifficultyLevel={setDifficultyLevel} startStatus={startClicked} setStartClicked={setStartClicked}/>)}
+    {!startClicked&&(<StartGame difficultyLevel={difficultyLevel} setDifficultyLevel={setDifficultyLevel} startStatus={startClicked} setStartClicked={setStartClicked}/>)}
     {startClicked&&(<Gameboard difficultyLevel={difficultyLevel}/>)}
     </>
   )

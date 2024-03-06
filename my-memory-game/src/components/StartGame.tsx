@@ -41,7 +41,7 @@ export default function StartGame(props: any) {
       <div className="difficulty-banner text-white font-bold text-4xl mt-20 -mb-44">
         Current-Difficulty:{difficultyState || `Medium`}
       </div>
-      <button className={props.className} onClick={handleStart}>
+      <button className="start-btn" onClick={handleStart}>
         Start Game
       </button>
 
@@ -49,7 +49,7 @@ export default function StartGame(props: any) {
         <div className="difficulty flex justify-around mt-4">
           <button
             role="button"
-            className="easy button-57 center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            className="easy button-57 center shadow-slate-100 shadow-2xl bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
             onClick={handleDifficulty}
           >
             <span className="text"></span>Easy
@@ -74,7 +74,7 @@ export default function StartGame(props: any) {
           </button>
         </div>
         <div className="loading-page">
-       <img className="ml-32 mt-10" src={pikachu} width={250} height={250} alt="running-pikachu"/>
+       <img className="pikachu-running -ml-72 mt-10" src={pikachu} width={250} height={250} alt="running-pikachu"/>
        </div>
       </div>
     </>
