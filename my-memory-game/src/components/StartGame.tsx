@@ -49,7 +49,7 @@ export default function StartGame(props: any) {
         <div className="difficulty flex justify-around mt-4">
           <button
             role="button"
-            className="easy button-57 center shadow-slate-100 shadow-2xl bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            className="button-57 center shadow-slate-100 shadow-2xl bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
             onClick={handleDifficulty}
           >
             <span className="text"></span>Easy
@@ -58,7 +58,7 @@ export default function StartGame(props: any) {
 
           <button
             role="button"
-            className="medium  button-57 self-center bg-yellow-300 hover:bg-yellow-200 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            className="button-57 self-center bg-yellow-300 hover:bg-yellow-200 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
             onClick={handleDifficulty}
           >
             <span className="text"></span>Medium
@@ -66,7 +66,7 @@ export default function StartGame(props: any) {
           </button>
           <button
             role="button"
-            className="easy button-57 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            className="button-57 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
             onClick={handleDifficulty}
           >
             <span className="text"></span>Difficult

@@ -1,25 +1,26 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "composite": true,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "node", // Adjusted to "node"
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "allowJs": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react-jsx", // Ensure this is correctly set
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noFallthroughCasesInSwitch": true,
-    // Remove "allowImportingTsExtensions": true,
-    // Add options to relax rules about unused code if needed:
-    "noUnusedLocals": false, // Do not error on unused locals
-    "noUnusedParameters": false // Do not error on unused parameters
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": [
+    "node_modules"
+  ]
 }
