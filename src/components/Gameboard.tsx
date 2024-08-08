@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import pokeballPng from "./../assets/pokeball-pokemon-svgrepo-com.svg";
 import { Card } from "./Card";
 import Modal from "./Modal";
+import PropTypes from 'prop-types'
 type Pokemon = any;
+interface GameboardProps {
+  difficultyLevel: "EASY" | "MEDIUM" | "HARD" | string;
+}
 
-export default function Gameboard(props: any) {
-  const audio = new Audio("./../public/button-124476.mp3");
+export default function Gameboard(props: GameboardProps) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio("./../public/button-124476.mp3");
+  }, []);
   const [score, setScore] = useState(0);
   const [maxScore, setMaxScore] = useState(8);
   const [maxPokemons, setMaxPokemons] = useState(0);
@@ -118,8 +126,14 @@ export default function Gameboard(props: any) {
     }
   };
 
-  const start = () => {
-    audio.play();
+  const start = async () => {
+    if(audioRef.current){
+      try {
+        await audioRef.current.play();
+      } catch(error) {
+        console.error("Error playing the audio", error);
+      }
+    }
   };
 
   const gridLayoutStyle = {

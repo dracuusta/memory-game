@@ -352,7 +352,7 @@ span {
 
 
 .pikachu-running{
-  animation: moveRight 10s forwards;
+  animation: moveRight 3s forwards infinite;
   position: relative;
   left: 0;
 }
